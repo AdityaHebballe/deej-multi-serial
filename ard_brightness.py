@@ -4,14 +4,13 @@ import time
 
 # Set up TinyTuya device
 d = tinytuya.BulbDevice(
-    dev_id='d7350bb8dec86d4cacv92v',
-    address='192.168.1.156',  # Or set to 'Auto' to auto-discover IP address
-    local_key='uyKos]3O_%N+ps{e', 
-    version=3.5
+    dev_id='device id',
+    address='device ip',  
+    local_key='device key', 
+    version=3.5 
 )
 
-# Set up serial connection
-ser = serial.Serial('/dev/pts/5', 9600)  # Replace 'COM3' with your Arduino serial port
+ser = serial.Serial('/dev/pts/5', 9600) # edit serial port as required
 
 def set_brightness(value):
     # Map the Arduino value (0-1023) to brightness percentage (0-100)

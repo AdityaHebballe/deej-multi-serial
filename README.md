@@ -1,3 +1,4 @@
+![deej](deej.jpg)
 # Modifications
  - The serial port is split into two virtual serial ports to add support for mapping inputs to external scripts. Currently only for linux 
 

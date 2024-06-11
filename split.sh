@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Get the list of ttyUSB devices
+# Get the list of ttyUSB devices, it might be different in yours check the Arduino IDE for available ports
 TTY_DEVICES=$(ls /dev/ttyUSB* 2>/dev/null)
 
 # Check if any ttyUSB devices are found
@@ -9,7 +9,7 @@ if [ -z "$TTY_DEVICES" ]; then
     exit 1
 fi
 
-# Get the single available ttyUSB device
+# Here it is assumed that only a single port is returned if not then adjust code accordingly
 REAL_TTY=$TTY_DEVICES
 
 MUX_PATH="/tmp/ttyS0mux"

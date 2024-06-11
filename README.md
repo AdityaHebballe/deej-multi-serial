@@ -1,5 +1,5 @@
 # Modifications
- - The serial port is split into two virtual serial ports to add support for mapping inputs to external scripts.
+ - The serial port is split into two virtual serial ports to add support for mapping inputs to external scripts. Currently only for linux 
 
 # Features
  - Automatic serial port selection splitting
@@ -10,6 +10,7 @@
 # Planned features
  - Support for automatic startup of deej and script together
  - Macro support to act as a keyboard shortcut
+ - Windows support 
 
 
 # deej

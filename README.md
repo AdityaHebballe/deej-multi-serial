@@ -1,6 +1,21 @@
+# Modifications
+ - The serial port is split into two virtual serial ports to add support for mapping inputs to external scripts.
+
+# Features
+ - Automatic serial port selection splitting
+ - Support for bash or python scripts using pyserial library
+ - Refer to ard_brightness.py script for an example script. (It is used to control brightness of a Tuya Smart Bulb)
+ - Modify split.sh to any number of virtual serial ports as required. Officially I recommend 2 (one for deej and one for script).
+
+# Planned features
+ - Support for automatic startup of deej and script together
+ - Macro support to act as a keyboard shortcut
+
+
 # deej
 
 deej is an **open-source hardware volume mixer** for Windows and Linux PCs. It lets you use real-life sliders (like a DJ!) to **seamlessly control the volumes of different apps** (such as your music player, the game you're playing and your voice chat session) without having to stop what you're doing.
+
 
 **Join the [deej Discord server](https://discord.gg/nf88NJu) if you need help or have any questions!**
 

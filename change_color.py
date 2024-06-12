@@ -5,9 +5,9 @@ import subprocess  # For running system commands to simulate play/pause
 
 # Set up TinyTuya device
 d = tinytuya.BulbDevice(
-    dev_id='d7350bb8dec86d4cacv92v',
-    address='192.168.1.156',  # Or set to 'Auto' to auto-discover IP address
-    local_key='uyKos]3O_%N+ps{e', 
+    dev_id='device id',
+    address='ip address of deej',  # Or set to 'Auto' to auto-discover IP address
+    local_key='local key', 
     version=3.5
 )
 d.set_retry(retry=True)

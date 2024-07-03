@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
+	"os/exec"
 	"github.com/jacobsa/go-serial/serial"
 	"go.uber.org/zap"
 
@@ -259,12 +259,16 @@ func (sio *SerialIO) handleLine(logger *zap.SugaredLogger, line string) {
 	for sliderIdx, stringValue := range splitLine {
 
 		// convert string values to integers ("1023" -> 1023)
-		number, _ := strconv.Atoi(stringValue)
+		number, err := strconv.Atoi(stringValue)
+		if err != nil {
+			logger.Warnw("Failed to convert slider value to integer", "sliderIdx", sliderIdx, "value", stringValue, "error", err)
+			continue
+		}
 
 		// turns out the first line could come out dirty sometimes (i.e. "4558|925|41|643|220")
 		// so let's check the first number for correctness just in case
 		if sliderIdx == 0 && number > 1023 {
-			sio.logger.Debugw("Got malformed line from serial, ignoring", "line", line)
+			logger.Debugw("Got malformed line from serial, ignoring", "line", line)
 			return
 		}
 
@@ -292,6 +296,19 @@ func (sio *SerialIO) handleLine(logger *zap.SugaredLogger, line string) {
 
 			if sio.deej.Verbose() {
 				logger.Debugw("Slider moved", "event", moveEvents[len(moveEvents)-1])
+			}
+
+			// Check if the slider index is in the range of interest (4th, 5th, 6th values)
+			if sliderIdx >= 3 && sliderIdx <= 5 {
+				// Call the Python script with the necessary arguments
+				args := append([]string{"lights.py"}, splitLine...)
+				cmd := exec.Command("python3", args...)
+				output, err := cmd.Output()
+				if err != nil {
+					logger.Warnw("Failed to execute lights.py", "error", err)
+				} else {
+					logger.Debugw("Executed lights.py", "output", string(output))
+				}
 			}
 		}
 	}
